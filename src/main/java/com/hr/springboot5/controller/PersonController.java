@@ -16,6 +16,7 @@ public class PersonController {
     @RequestMapping("/findAll")
     public ModelAndView findAll(){
         ModelAndView mv = new ModelAndView("/book/list");
+        System.out.println("彭泽辉测试");
         mv.addObject("personList",personService.findAll());
         return  mv;
     }
