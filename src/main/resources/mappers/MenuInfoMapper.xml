@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.springboot5.dao.MenuInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hr.springboot5.entity.MenuInfo">
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_state" jdbcType="INTEGER" property="menuState" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="super_menu_id" jdbcType="INTEGER" property="superMenuId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mydata.menu_info
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hr.springboot5.entity.MenuInfo">
+    insert into mydata.menu_info (menu_id, menu_name, menu_state,
+      url, super_menu_id)
+    values (#{menuId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuState,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{superMenuId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hr.springboot5.entity.MenuInfo">
+    update mydata.menu_info
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_state = #{menuState,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      super_menu_id = #{superMenuId,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select menu_id, menu_name, menu_state, url, super_menu_id
+    from mydata.menu_info
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select menu_id, menu_name, menu_state, url, super_menu_id
+    from mydata.menu_info
+  </select>
+</mapper>

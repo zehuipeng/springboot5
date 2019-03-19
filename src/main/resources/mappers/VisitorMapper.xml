@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.springboot5.dao.VisitorMapper">
+  <resultMap id="BaseResultMap" type="com.hr.springboot5.entity.Visitor">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
+    <result column="visitor_time" jdbcType="TIMESTAMP" property="visitorTime" />
+    <result column="direction" jdbcType="INTEGER" property="direction" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mydata.visitor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hr.springboot5.entity.Visitor">
+    insert into mydata.visitor (id, name, card_no,
+      visitor_time, direction, type
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+      #{visitorTime,jdbcType=TIMESTAMP}, #{direction,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hr.springboot5.entity.Visitor">
+    update mydata.visitor
+    set name = #{name,jdbcType=VARCHAR},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      visitor_time = #{visitorTime,jdbcType=TIMESTAMP},
+      direction = #{direction,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, card_no, visitor_time, direction, type
+    from mydata.visitor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, card_no, visitor_time, direction, type
+    from mydata.visitor
+  </select>
+</mapper>

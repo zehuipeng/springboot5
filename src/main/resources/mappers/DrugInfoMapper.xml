@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.springboot5.dao.DrugInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hr.springboot5.entity.DrugInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="drug_no" jdbcType="VARCHAR" property="drugNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="date" jdbcType="DATE" property="date" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mydata.drug_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hr.springboot5.entity.DrugInfo">
+    insert into mydata.drug_info (id, drug_no, name,
+      type, price, stock, 
+      date)
+    values (#{id,jdbcType=INTEGER}, #{drugNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{stock,jdbcType=INTEGER}, 
+      #{date,jdbcType=DATE})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hr.springboot5.entity.DrugInfo">
+    update mydata.drug_info
+    set drug_no = #{drugNo,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      stock = #{stock,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, drug_no, name, type, price, stock, date
+    from mydata.drug_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, drug_no, name, type, price, stock, date
+    from mydata.drug_info
+  </select>
+</mapper>
